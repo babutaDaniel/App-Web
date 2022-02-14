@@ -18,19 +18,19 @@ The application is provided with a registration system for new users and a login
 
 ### *Login page*
 
-![Display](images/Login.png)
+![Display](images/Login.PNG)
 
 <br>
 
 ### *Register page*
 
-![Display](images/Register.png)
+![Display](images/Register.PNG)
 
 <br>
 
 In this web application can be stored a large number of movies that the admin will enter, having a special page.
 
-![Display](images/Admin.png)
+![Display](images/Admin.PNG)
 
 <br>
 
@@ -40,18 +40,18 @@ In the next section you can see the interface of the website and some of the fea
 
 ### *Home page*
 
-![Display](images/Home_page.png)
+![Display](images/Home_page.PNG)
 
 <br>
 
 ### *List movies*
 
-![Display](images/List_movies.png)
+![Display](images/List_movies.PNG)
 
 <br>
 
 ### *Profile*
 
-![Display](images/Profile.png)
+![Display](images/Profile.PNG)
 
 

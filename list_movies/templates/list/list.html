@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+    {% block body %}
+
+        <title> Movie Page</title>
+
+        <h1> Movie page</h1>
+
+              Salutare!
+
+
+       {% endblock %}
+
+
+    {% block head %}
+     <ul>
+
+        {% if page_obj.paginator.num_pages > 1 %}
+           <div class="row">
+                <div class="col-12">
+                    {% if page_obj.has_previous %}
+                        <a href="{% url 'list:all' %}?page={{page_obj.previous_page_number}}">Previous page </a>
+                    {%else%}
+                        <div>The first page.</div>
+                    {%endif%}
+                    <div>Current page {{page_obj.number}} </div>
+                    {% if page_obj.has_next %}
+                        <a href="{% url 'list:all' %}?page={{page_obj.next_page_number}}">Next page </a>
+                    {%else%}
+                        <div>The last page.</div>
+                    {%endif%}
+
+                </div>
+            </div>
+
+            <form method="get">
+                {{my_filter.form}}
+            <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+
+            {% for product in page_obj %}
+                <div class='container'>
+                <div class='row justify-content-center'>
+                <div class="card mb-3" style="max-width: 890px;">
+                    <div class="card text-white bg-secondary " style="max-width: 100rem;">
+                    <div class="row">
+                        <div class="col">
+
+                            <img src="{{ product.profile_image.url }}" class="img-fluid rounded" width= "150"  height="75" alt="...">
+                        </div>
+
+                        <div class="col-sm-9">
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-5">
+
+                                    <h5 class="card-title">{{product.name}}  </h5>
+                                </div>
+                                <div class="col-sm-5">
+
+                                       <h6 class="card-title"> Comments Rating: {{product.avg}} </h6>
+
+
+
+
+                                    <h6 > Our Rating: {{product.rating}}</h6>
+                                </div>
+                            </div>
+                            <p class="card-text"> {{product.description}}</p>
+                            <p class="card-text"> {{product.total_like}} Likes</p>
+                            <a href="{% url 'list:details' product.pk %}" class='btn btn-primary mt-2'>Details</a>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                {%endfor%}
+
+        {%else%}
+          <p> No movies...</p>
+
+        {%endif%}
+
+       </ul>
+
+     {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block head %}
+        <title> Home Page</title>
+        {% endblock %}
+
+
+        {% block body %}
+        <img src="{% static 'images/logo2.png' %}" width="100" />
+            <div class="container">
+                <div class="centered">
+                {% if request.user.is_authenticated %}
+                    <h1 style="text-align:center">WELCOME {{ request.user.username }}</h1>
+                {%else%}
+                    <h1 style="text-align:center">WELCOME guest</h1>
+                {%endif%}
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <p1>This is the Homepage!</p1>
+        </div>
+        <div class="row">
+            <p1>This is one of the best site in the world! Here you can find different types on reviews from users that have anything to say.</p1>
+        </div>
+        <div class="row">
+            <p2>I hope that you can tell us your opinion and our community will be glad to read it!</p2>
+        </div>
+
+
+
+
+
+
+
+        {% endblock %}

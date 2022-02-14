@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <title>{{list.name}}</title>
+    {% endblock %}
+
+{% block head %}
+     <div class='container'>
+                <div class='row justify-content-center'>
+
+                    {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col">
+                            <img src="{{each_product.profile_image.url}}" class="img-fluid rounded" width= "300" height="100" >
+                        </div>
+                        <div class="col">
+
+                                <h5 class="card-title">{{each_product.name}}</h5>
+                                <h6 class="card-title">Our Rating: {{each_product.rating}} </h6>
+
+                                    <h7 class="card-title">Comments AVG : {{each_product.avg}}</h7>
+
+
+
+                                <p class="card-text"> {{each_product.description}} {{each_product.nr_com}} </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <img src="{{each_product.profile_image.url}}" class="img-fluid rounded-start" width= "100" height="75" >
+                <img src="{{each_product.second_image.url}}" class="img-fluid rounded-start" width= "100"  height="75">
+                <img src="{{each_product.third_image.url}}" class="img-fluid rounded-end" width= "100"  height="75">
+
+                <br><br>
+                {% if request.user.is_authenticated %}
+                    <form action ="{% url 'list:like' each_product.pk%}" method="POST">
+                    {% csrf_token %}
+                    {% if liked %}
+                        <button type="submit", name="each_product_pk", value="{{ each_product.pk }}", class="btn btn-danger btn-sm" > Unlike </button>
+                    {% else %}
+                        <button type="submit", name="each_product_pk", value="{{ each_product.pk }}", class="btn btn-primary btn-sm" > Like </button>
+                    {%endif%}
+
+                    - {{ total_likes }} Likes
+                    </form>
+                {%else%}
+                    (Login to like) {{ total_likes }} Likes
+
+                {%endif%}
+                <br><br>
+
+                <hr>
+                    <div class="main-comment-selection">
+                        {{ comments.count }} Comments
+                        {% for comment in comments %}
+                            <figure>
+                            <blockquote class="blockquote">
+                                <p class="mb-2"> {{ comment.content }}   {{ comment.avg }} </p>
+                            </blockquote>
+                            <footer class="blockquote-footer">
+                            Commented by <cite title="Source Title"> {{ comment.user }} </cite>  Stars <cite title="Source Title"> {{ comment.stars }} </footer>
+                            </figure>
+                            {%endfor%}
+                    </div>
+
+                    {% if request.user.is_authenticated %}
+
+                    <form method="post" action="" role="form" class="col s6">
+                        {% csrf_token %}
+                        <div class="input-field col s6">
+                        Stars: {{ comment_form.stars }}
+                        </div>
+
+                        <div class="input-field col s6">
+                        Comment:
+                        <br>
+                        <div class="materialize-textarea" cols="60" rows="3" >
+                        {{ comment_form.content }}
+                        </div>
+
+                        <input type="submit" value="Add comment" class="btn btn-outline-success">
+                        </div>
+                    </form>
+                        {%endif%}
+
+
+                <a href="/list/" class='btn btn-primary'>Back</a>
+     </div>
+
+     {% endblock %}
+
